@@ -21,7 +21,6 @@ class TrajectoryGenerationServer(Node):
         goal_handle.succeed()
 
         result = Waypoint.Result()
-        result.success = True
         return result
 
 

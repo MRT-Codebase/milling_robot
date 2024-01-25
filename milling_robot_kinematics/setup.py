@@ -25,6 +25,7 @@ setup(
         'console_scripts': [
             'execute_trajectory_node = milling_robot_kinematics.execute_trajectory_node:main',
             'trajectory_generation_node = milling_robot_kinematics.trajectory_generation_node:main',
+            'control_node = milling_robot_kinematics.control_node:main',
         ],
     },
 )
