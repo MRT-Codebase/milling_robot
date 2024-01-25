@@ -1,0 +1,5 @@
+milling_robot_interfaces/Waypoint waypoint
+---
+trajectory_msgs/JointTrajectory trajectory
+---
+int32 percent

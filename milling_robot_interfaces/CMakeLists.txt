@@ -11,13 +11,19 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(trajectory_msgs REQUIRED)
 
 # Declare ROS messages, services and actions
+set(msg_files
+  "msg/Waypoint.msg"
+)
+
 set(action_files
-  "action/JointTrajectory.action"
+  "action/Trajectory.action"
+  "action/Waypoint.action"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  ${msg_files}
   ${action_files}
-  DEPENDENCIES trajectory_msgs
+  DEPENDENCIES trajectory_msgs std_msgs geometry_msgs
   ADD_LINTER_TESTS
 )
 
