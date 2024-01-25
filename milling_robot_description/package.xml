@@ -2,12 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>milling_robot_description</name>
-  <version>1.1.0</version>
+  <version>0.0.1</version>
   <description>Milling robot visual representation consisting of meshes and URDF.</description>
   <maintainer email="kousheekc@gmail.com">kousheekc</maintainer>
-
   <license>Apache-2.0</license>
-  <author email="kousheekc@gmail.com">kousheekc</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
   <exec_depend>urdf_launch</exec_depend>
