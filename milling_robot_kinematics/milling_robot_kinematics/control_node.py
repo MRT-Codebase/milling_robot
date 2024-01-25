@@ -9,7 +9,7 @@ class ControlClient(Node):
     def __init__(self):
         super().__init__('control_node')
         self.trajectory_generation_client = ActionClient(self, Waypoint, 'waypoint')
-
+        
     def send_goal(self):
         goal_msg = Waypoint.Goal()
         for i in range(5):

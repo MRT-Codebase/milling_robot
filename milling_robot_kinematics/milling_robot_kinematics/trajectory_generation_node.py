@@ -1,3 +1,5 @@
+import time
+
 import rclpy
 from rclpy.node import Node
 from rclpy.action import ActionServer
@@ -14,6 +16,7 @@ class TrajectoryGenerationServer(Node):
         
         for point in goal_handle.request.waypoint.waypoints:
             print(point)
+            time.sleep(10)
 
         feedback_msg = Waypoint.Feedback()
         feedback_msg.percent = 0

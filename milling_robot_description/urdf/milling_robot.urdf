@@ -12,7 +12,6 @@
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -33,7 +32,6 @@
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link1.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.0 -0.0 -0.03" rpy="0 0 0"/>
@@ -54,7 +52,6 @@
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.003 0.045 -0.025" rpy="0 0 0"/>
@@ -75,7 +72,6 @@
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="0.0 0.082 -0.025" rpy="0 0 0"/>
@@ -96,7 +92,6 @@
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="0.0 0.082 -0.025" rpy="0 0 0"/>
