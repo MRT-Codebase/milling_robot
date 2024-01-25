@@ -2,8 +2,8 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>milling_robot_kinematics</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <version>0.0.1</version>
+  <description>Package contains the robot FK, IK models and stick figure visualizations with plotly.</description>
   <maintainer email="kousheekc@gmail.com">kousheek</maintainer>
   <license>Apache-2.0</license>
 
