@@ -1,2 +1,3 @@
-geometry_msgs/Point[] waypoints
+nav_msgs/Path waypoints
 string mode
+duration time

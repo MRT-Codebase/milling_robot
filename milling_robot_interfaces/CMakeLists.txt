@@ -23,7 +23,7 @@ set(action_files
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
   ${action_files}
-  DEPENDENCIES trajectory_msgs std_msgs geometry_msgs
+  DEPENDENCIES trajectory_msgs std_msgs nav_msgs
   ADD_LINTER_TESTS
 )
 
