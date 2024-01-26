@@ -9,7 +9,11 @@ class MyMainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # Your additional setup code goes here
+        self.ui.q1_minus.clicked.connect(self.q1_minus_click)
+
+    def q1_minus_click(self):
+        print("q1 minus pressed")
+        print(self.ui.q1_inc.value())
 
 if __name__ == "__main__":
     app = QApplication([])

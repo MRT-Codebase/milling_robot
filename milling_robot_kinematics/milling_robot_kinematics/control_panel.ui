@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>400</height>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,7 +16,7 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="Title">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
         <horstretch>0</horstretch>
@@ -49,11 +49,11 @@
      </widget>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="control_layout">
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <layout class="QVBoxLayout" name="joint_control_layout">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="joint_control_title">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
             <horstretch>0</horstretch>
@@ -89,21 +89,11 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="2">
-           <widget class="QPushButton" name="d4_plus">
+         <layout class="QGridLayout" name="joint_control_input_layout">
+          <item row="2" column="1">
+           <widget class="QPushButton" name="q3_minus">
             <property name="text">
-             <string>D4+</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QDoubleSpinBox" name="q1_inc"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QPushButton" name="d4_minus">
-            <property name="text">
-             <string>D4-</string>
+             <string>Q3-</string>
             </property>
            </widget>
           </item>
@@ -117,42 +107,32 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="d4_val">
+          <item row="2" column="2">
+           <widget class="QPushButton" name="q3_plus">
             <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Q3+</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
-           <widget class="QDoubleSpinBox" name="d4_inc"/>
+          <item row="1" column="0">
+           <widget class="QDoubleSpinBox" name="q2_inc"/>
           </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="q1_minus">
+          <item row="3" column="2">
+           <widget class="QPushButton" name="d4_plus">
             <property name="text">
-             <string>Q1-</string>
+             <string>D4+</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="q2_val">
+          <item row="0" column="2">
+           <widget class="QPushButton" name="q1_plus">
             <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Q1+</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="q2_minus">
-            <property name="text">
-             <string>Q2-</string>
-            </property>
-           </widget>
+          <item row="0" column="0">
+           <widget class="QDoubleSpinBox" name="q1_inc"/>
           </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="q2_plus">
@@ -171,32 +151,52 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="q3_minus">
+          <item row="3" column="1">
+           <widget class="QPushButton" name="d4_minus">
             <property name="text">
-             <string>Q3-</string>
+             <string>D4-</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="q3_plus">
+          <item row="0" column="1">
+           <widget class="QPushButton" name="q1_minus">
             <property name="text">
-             <string>Q3+</string>
+             <string>Q1-</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QDoubleSpinBox" name="q2_inc"/>
-          </item>
-          <item row="0" column="2">
-           <widget class="QPushButton" name="q1_plus">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="q2_minus">
             <property name="text">
-             <string>Q1+</string>
+             <string>Q2-</string>
             </property>
            </widget>
           </item>
           <item row="2" column="0">
            <widget class="QDoubleSpinBox" name="q3_inc"/>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="q2_val">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QDoubleSpinBox" name="d4_inc"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="d4_val">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -223,9 +223,9 @@
        </widget>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="cartesian_control_layout">
         <item>
-         <widget class="QLabel" name="label_3">
+         <widget class="QLabel" name="cartesian_control_title">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
             <horstretch>0</horstretch>
@@ -248,7 +248,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_4">
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -261,14 +261,24 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_3">
+         <layout class="QGridLayout" name="cartesian_control_input_layout">
+          <item row="1" column="1">
+           <widget class="QPushButton" name="y_minus">
+            <property name="text">
+             <string>Y-</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QDoubleSpinBox" name="y_inc"/>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="z_minus">
+          <item row="1" column="3">
+           <widget class="QLabel" name="y_val">
             <property name="text">
-             <string>Z-</string>
+             <string>TextLabel</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -279,17 +289,10 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="2">
-           <widget class="QPushButton" name="z_plus">
+          <item row="2" column="1">
+           <widget class="QPushButton" name="z_minus">
             <property name="text">
-             <string>Z+</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="y_plus">
-            <property name="text">
-             <string>Y+</string>
+             <string>Z-</string>
             </property>
            </widget>
           </item>
@@ -303,6 +306,20 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="y_plus">
+            <property name="text">
+             <string>Y+</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QPushButton" name="z_plus">
+            <property name="text">
+             <string>Z+</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="1">
            <widget class="QPushButton" name="x_minus">
             <property name="text">
@@ -310,22 +327,8 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="y_minus">
-            <property name="text">
-             <string>Y-</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="y_val">
-            <property name="text">
-             <string>TextLabel</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
+          <item row="2" column="0">
+           <widget class="QDoubleSpinBox" name="z_inc"/>
           </item>
           <item row="0" column="0">
            <widget class="QDoubleSpinBox" name="x_inc"/>
@@ -340,13 +343,10 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QDoubleSpinBox" name="z_inc"/>
-          </item>
          </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer_3">
+         <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
@@ -354,6 +354,174 @@
            <size>
             <width>20</width>
             <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="trajectory_generation_layout">
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="trajectory_generation_title">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>14</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Trajectory Generation</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="waypoint_management_layout" stretch="1,2">
+        <item>
+         <layout class="QVBoxLayout" name="waypoint_management_input_layout">
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="add_waypoint">
+            <property name="text">
+             <string>Add Waypoint</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="delete_waypoint">
+            <property name="text">
+             <string>Delete Waypoint</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="reset_trajectory">
+            <property name="text">
+             <string>Reset</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QListView" name="listView">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="play_pause_layout">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="play">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Play</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pause">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Pause</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="stop">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Stop</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
            </size>
           </property>
          </spacer>
