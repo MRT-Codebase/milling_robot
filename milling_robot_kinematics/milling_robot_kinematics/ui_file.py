@@ -76,6 +76,7 @@ class Ui_MainWindow(object):
         self.joint_control_input_layout.setObjectName(u"joint_control_input_layout")
         self.q3_minus = QPushButton(self.centralwidget)
         self.q3_minus.setObjectName(u"q3_minus")
+        self.q3_minus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q3_minus, 2, 1, 1, 1)
 
@@ -87,31 +88,37 @@ class Ui_MainWindow(object):
 
         self.q3_plus = QPushButton(self.centralwidget)
         self.q3_plus.setObjectName(u"q3_plus")
+        self.q3_plus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q3_plus, 2, 2, 1, 1)
 
         self.q2_inc = QDoubleSpinBox(self.centralwidget)
         self.q2_inc.setObjectName(u"q2_inc")
+        self.q2_inc.setValue(5.000000000000000)
 
         self.joint_control_input_layout.addWidget(self.q2_inc, 1, 0, 1, 1)
 
         self.d4_plus = QPushButton(self.centralwidget)
         self.d4_plus.setObjectName(u"d4_plus")
+        self.d4_plus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.d4_plus, 3, 2, 1, 1)
 
         self.q1_plus = QPushButton(self.centralwidget)
         self.q1_plus.setObjectName(u"q1_plus")
+        self.q1_plus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q1_plus, 0, 2, 1, 1)
 
         self.q1_inc = QDoubleSpinBox(self.centralwidget)
         self.q1_inc.setObjectName(u"q1_inc")
+        self.q1_inc.setValue(5.000000000000000)
 
         self.joint_control_input_layout.addWidget(self.q1_inc, 0, 0, 1, 1)
 
         self.q2_plus = QPushButton(self.centralwidget)
         self.q2_plus.setObjectName(u"q2_plus")
+        self.q2_plus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q2_plus, 1, 2, 1, 1)
 
@@ -123,21 +130,25 @@ class Ui_MainWindow(object):
 
         self.d4_minus = QPushButton(self.centralwidget)
         self.d4_minus.setObjectName(u"d4_minus")
+        self.d4_minus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.d4_minus, 3, 1, 1, 1)
 
         self.q1_minus = QPushButton(self.centralwidget)
         self.q1_minus.setObjectName(u"q1_minus")
+        self.q1_minus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q1_minus, 0, 1, 1, 1)
 
         self.q2_minus = QPushButton(self.centralwidget)
         self.q2_minus.setObjectName(u"q2_minus")
+        self.q2_minus.setAutoRepeat(True)
 
         self.joint_control_input_layout.addWidget(self.q2_minus, 1, 1, 1, 1)
 
         self.q3_inc = QDoubleSpinBox(self.centralwidget)
         self.q3_inc.setObjectName(u"q3_inc")
+        self.q3_inc.setValue(5.000000000000000)
 
         self.joint_control_input_layout.addWidget(self.q3_inc, 2, 0, 1, 1)
 
@@ -149,6 +160,7 @@ class Ui_MainWindow(object):
 
         self.d4_inc = QDoubleSpinBox(self.centralwidget)
         self.d4_inc.setObjectName(u"d4_inc")
+        self.d4_inc.setValue(2.000000000000000)
 
         self.joint_control_input_layout.addWidget(self.d4_inc, 3, 0, 1, 1)
 
@@ -194,11 +206,13 @@ class Ui_MainWindow(object):
         self.cartesian_control_input_layout.setObjectName(u"cartesian_control_input_layout")
         self.y_minus = QPushButton(self.centralwidget)
         self.y_minus.setObjectName(u"y_minus")
+        self.y_minus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.y_minus, 1, 1, 1, 1)
 
         self.y_inc = QDoubleSpinBox(self.centralwidget)
         self.y_inc.setObjectName(u"y_inc")
+        self.y_inc.setValue(2.000000000000000)
 
         self.cartesian_control_input_layout.addWidget(self.y_inc, 1, 0, 1, 1)
 
@@ -210,11 +224,13 @@ class Ui_MainWindow(object):
 
         self.x_plus = QPushButton(self.centralwidget)
         self.x_plus.setObjectName(u"x_plus")
+        self.x_plus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.x_plus, 0, 2, 1, 1)
 
         self.z_minus = QPushButton(self.centralwidget)
         self.z_minus.setObjectName(u"z_minus")
+        self.z_minus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.z_minus, 2, 1, 1, 1)
 
@@ -226,26 +242,31 @@ class Ui_MainWindow(object):
 
         self.y_plus = QPushButton(self.centralwidget)
         self.y_plus.setObjectName(u"y_plus")
+        self.y_plus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.y_plus, 1, 2, 1, 1)
 
         self.z_plus = QPushButton(self.centralwidget)
         self.z_plus.setObjectName(u"z_plus")
+        self.z_plus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.z_plus, 2, 2, 1, 1)
 
         self.x_minus = QPushButton(self.centralwidget)
         self.x_minus.setObjectName(u"x_minus")
+        self.x_minus.setAutoRepeat(True)
 
         self.cartesian_control_input_layout.addWidget(self.x_minus, 0, 1, 1, 1)
 
         self.z_inc = QDoubleSpinBox(self.centralwidget)
         self.z_inc.setObjectName(u"z_inc")
+        self.z_inc.setValue(2.000000000000000)
 
         self.cartesian_control_input_layout.addWidget(self.z_inc, 2, 0, 1, 1)
 
         self.x_inc = QDoubleSpinBox(self.centralwidget)
         self.x_inc.setObjectName(u"x_inc")
+        self.x_inc.setValue(2.000000000000000)
 
         self.cartesian_control_input_layout.addWidget(self.x_inc, 0, 0, 1, 1)
 

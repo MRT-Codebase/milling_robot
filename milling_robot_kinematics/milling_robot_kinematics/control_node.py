@@ -28,6 +28,12 @@ class ControlPanel(QMainWindow):
         self.ui.q3_plus.clicked.connect(self.q3_plus_click)
         self.ui.d4_minus.clicked.connect(self.d4_minus_click)
         self.ui.d4_plus.clicked.connect(self.d4_plus_click)
+        self.ui.x_minus.clicked.connect(self.x_minus_click)
+        self.ui.x_plus.clicked.connect(self.x_plus_click)
+        self.ui.y_minus.clicked.connect(self.y_minus_click)
+        self.ui.y_plus.clicked.connect(self.y_plus_click)
+        self.ui.z_minus.clicked.connect(self.z_minus_click)
+        self.ui.z_plus.clicked.connect(self.z_plus_click)
 
         self.update_state()
 
@@ -98,6 +104,30 @@ class ControlPanel(QMainWindow):
 
     def d4_plus_click(self):
         self.robot.movej('D4', self.ui.d4_inc.value())
+        self.update_state()
+
+    def x_minus_click(self):
+        self.robot.movel('X', -self.ui.x_inc.value())
+        self.update_state()
+
+    def x_plus_click(self):
+        self.robot.movel('X', self.ui.x_inc.value())
+        self.update_state()
+
+    def y_minus_click(self):
+        self.robot.movel('Y', -self.ui.y_inc.value())
+        self.update_state()
+
+    def y_plus_click(self):
+        self.robot.movel('Y', self.ui.y_inc.value())
+        self.update_state()
+
+    def z_minus_click(self):
+        self.robot.movel('Z', -self.ui.z_inc.value())
+        self.update_state()
+
+    def z_plus_click(self):
+        self.robot.movel('Z', self.ui.z_inc.value())
         self.update_state()
 
 

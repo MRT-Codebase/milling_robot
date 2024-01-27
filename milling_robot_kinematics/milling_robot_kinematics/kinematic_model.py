@@ -34,7 +34,7 @@ class KinematicModel:
 
     def movej(self, axis, delta):
         next = self.current_joint_state[axis] + delta
-        if (next >= self.joint_limits[axis][0] and next <= self.joint_limits[axis][1]):
+        if (self.joint_limits[axis][0] <= next <= self.joint_limits[axis][1]):
             self.current_joint_state[axis] += delta
             pose = self.FKM(self.current_joint_state['Q1'], self.current_joint_state['Q2'], self.current_joint_state['D4'])
             self.current_cartesian_state['X'] = pose[0]
@@ -43,6 +43,21 @@ class KinematicModel:
             return True
         else:
             return False
+        
+    def movel(self, axis, delta):
+        self.current_cartesian_state[axis] += delta
+        j = self.IKM(self.current_cartesian_state['X'], self.current_cartesian_state['Y'], self.current_cartesian_state['Z'])
+        if (self.joint_limits['Q1'][0] <= j[0] <= self.joint_limits['Q1'][1] and
+            self.joint_limits['Q2'][0] <= j[1] <= self.joint_limits['Q2'][1] and
+            self.joint_limits['D4'][0] <= j[2] <= self.joint_limits['D4'][1]):
+            self.current_joint_state['Q1'] = j[0]
+            self.current_joint_state['Q2'] = j[1]
+            self.current_joint_state['D4'] = j[2]
+            return True
+        else:
+            self.current_cartesian_state[axis] -= delta
+            return False
+          
 
     def FKM(self, q1, q2, d4):
         x = -(self.a - (d4 + self.b) * math.sin(math.radians(q2))) * math.sin(math.radians(q1))

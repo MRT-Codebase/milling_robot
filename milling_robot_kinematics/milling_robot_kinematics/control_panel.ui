@@ -95,6 +95,9 @@
             <property name="text">
              <string>Q3-</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="3">
@@ -112,15 +115,25 @@
             <property name="text">
              <string>Q3+</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QDoubleSpinBox" name="q2_inc"/>
+           <widget class="QDoubleSpinBox" name="q2_inc">
+            <property name="value">
+             <double>5.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2">
            <widget class="QPushButton" name="d4_plus">
             <property name="text">
              <string>D4+</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -129,15 +142,25 @@
             <property name="text">
              <string>Q1+</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QDoubleSpinBox" name="q1_inc"/>
+           <widget class="QDoubleSpinBox" name="q1_inc">
+            <property name="value">
+             <double>5.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="1" column="2">
            <widget class="QPushButton" name="q2_plus">
             <property name="text">
              <string>Q2+</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -156,12 +179,18 @@
             <property name="text">
              <string>D4-</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="0" column="1">
            <widget class="QPushButton" name="q1_minus">
             <property name="text">
              <string>Q1-</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -170,10 +199,17 @@
             <property name="text">
              <string>Q2-</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QDoubleSpinBox" name="q3_inc"/>
+           <widget class="QDoubleSpinBox" name="q3_inc">
+            <property name="value">
+             <double>5.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="1" column="3">
            <widget class="QLabel" name="q2_val">
@@ -186,7 +222,11 @@
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QDoubleSpinBox" name="d4_inc"/>
+           <widget class="QDoubleSpinBox" name="d4_inc">
+            <property name="value">
+             <double>2.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="3" column="3">
            <widget class="QLabel" name="d4_val">
@@ -267,10 +307,17 @@
             <property name="text">
              <string>Y-</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QDoubleSpinBox" name="y_inc"/>
+           <widget class="QDoubleSpinBox" name="y_inc">
+            <property name="value">
+             <double>2.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="1" column="3">
            <widget class="QLabel" name="y_val">
@@ -287,12 +334,18 @@
             <property name="text">
              <string>X+</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
            <widget class="QPushButton" name="z_minus">
             <property name="text">
              <string>Z-</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -311,12 +364,18 @@
             <property name="text">
              <string>Y+</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="2">
            <widget class="QPushButton" name="z_plus">
             <property name="text">
              <string>Z+</string>
+            </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -325,13 +384,24 @@
             <property name="text">
              <string>X-</string>
             </property>
+            <property name="autoRepeat">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QDoubleSpinBox" name="z_inc"/>
+           <widget class="QDoubleSpinBox" name="z_inc">
+            <property name="value">
+             <double>2.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QDoubleSpinBox" name="x_inc"/>
+           <widget class="QDoubleSpinBox" name="x_inc">
+            <property name="value">
+             <double>2.000000000000000</double>
+            </property>
+           </widget>
           </item>
           <item row="0" column="3">
            <widget class="QLabel" name="x_val">
