@@ -43,9 +43,9 @@
 
   <link name="link2">
     <inertial>
-      <origin xyz="-0.003000007693934777 -0.016687618629062623 2.070121837838279e-09" rpy="0 0 0"/>
-      <mass value="0.021696703597929294"/>
-      <inertia ixx="3e-06" iyy="0.0" izz="3e-06" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+      <origin xyz="-0.0030000076939347767 2.070121761510446e-09 0.016687618629062588" rpy="0 0 0"/>
+      <mass value="0.02169670359792929"/>
+      <inertia ixx="3e-06" iyy="3e-06" izz="0.0" ixy="0.0" iyz="0.0" ixz="-0.0"/>
     </inertial>
     <visual>
       <origin xyz="-0.003 0.045 -0.025" rpy="0 0 0"/>
@@ -63,18 +63,18 @@
 
   <link name="link3">
     <inertial>
-      <origin xyz="-4.487079278032369e-11 -0.0024999999999999745 -1.0408340855860843e-17" rpy="0 0 0"/>
+      <origin xyz="-4.487079278032369e-11 -1.3183898417423734e-16 0.0024999999999999606" rpy="0 0 0"/>
       <mass value="0.0006165375582669755"/>
-      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
     </inertial>
     <visual>
-      <origin xyz="0.0 0.082 -0.025" rpy="0 0 0"/>
+      <origin xyz="0.0 0.045 -0.062" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
-      <origin xyz="0.0 0.082 -0.025" rpy="0 0 0"/>
+      <origin xyz="0.0 0.045 -0.062" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link3.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -83,20 +83,60 @@
 
   <link name="link4">
     <inertial>
-      <origin xyz="-3.2620662266947424e-11 -0.0030623001462547206 4.051913665703566e-11" rpy="0 0 0"/>
-      <mass value="0.003623226210979948"/>
-      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+      <origin xyz="-4.488899779880702e-11 1.935429594368543e-11 -0.01324937531353633" rpy="0 0 0"/>
+      <mass value="0.003336180247396665"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
     </inertial>
     <visual>
-      <origin xyz="0.0 0.092 -0.025" rpy="0 0 0"/>
+      <origin xyz="0.0 0.045 -0.067" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link4.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
     <collision>
-      <origin xyz="0.0 0.092 -0.025" rpy="0 0 0"/>
+      <origin xyz="0.0 0.045 -0.067" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://milling_robot_description/meshes/link4.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Gripper1">
+    <inertial>
+      <origin xyz="0.0004999999552965165 0.0020000003264611516 0.0023071958149916277" rpy="0 0 0"/>
+      <mass value="0.0001435229790341507"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.006 0.047 -0.068" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://milling_robot_description/meshes/Gripper1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.006 0.047 -0.068" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://milling_robot_description/meshes/Gripper1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="Gripper2">
+    <inertial>
+      <origin xyz="-0.0005000000447034827 0.00200000018199889 0.0023071958302258028" rpy="0 0 0"/>
+      <mass value="0.00014352299037443815"/>
+      <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.006 0.047 -0.068" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://milling_robot_description/meshes/Gripper2.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="-0.006 0.047 -0.068" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://milling_robot_description/meshes/Gripper2.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </collision>
   </link>
@@ -118,18 +158,35 @@
   </joint>
 
   <joint name="Q3" type="revolute">
-    <origin xyz="-0.003 -0.037 0.0" rpy="0 0 0"/>
+    <origin xyz="-0.003 0.0 0.037" rpy="0 0 0"/>
     <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.5"/>
     <parent link="link2"/>
     <child link="link3"/>
-    <axis xyz="0.0 -1.0 0.0"/>
+    <axis xyz="0.0 -0.0 1.0"/>
   </joint>
 
   <joint name="D4" type="prismatic">
-    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <origin xyz="0.0 0.0 0.005" rpy="0 0 0"/>
     <parent link="link3"/>
     <child link="link4"/>
-    <axis xyz="0.0 -1.0 0.0"/>
+    <axis xyz="0.0 -0.0 1.0"/>
     <limit effort="1000.0" lower="0.0" upper="0.03" velocity="0.5"/>
   </joint>
+
+  <joint name="G1" type="prismatic">
+    <origin xyz="-0.006 -0.002 0.001" rpy="0 0 0"/>
+    <parent link="link4"/>
+    <child link="Gripper1"/>
+    <axis xyz="1.0 -0.0 -0.0"/>
+    <limit effort="1000.0" lower="0.0" upper="0.006" velocity="0.5"/>
+  </joint>
+
+  <joint name="G2" type="prismatic">
+    <origin xyz="0.006 -0.002 0.001" rpy="0 0 0"/>
+    <parent link="link4"/>
+    <child link="Gripper2"/>
+    <axis xyz="-1.0 -0.0 -0.0"/>
+    <limit effort="1000.0" lower="0.0" upper="0.006" velocity="0.5"/>
+  </joint>
+
 </robot>

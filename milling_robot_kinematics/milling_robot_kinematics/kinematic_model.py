@@ -9,14 +9,18 @@ class KinematicModel:
             'Q1': [-90, 90],
             'Q2': [-90, 90],
             'Q3': [-90, 90],
-            'D4': [0, 30]
+            'D4': [0, 30],
+            'G1': [0, 6],
+            'G2': [0, 6]
         }
 
         self.current_joint_state = {
             'Q1': init_pose[0],
             'Q2': init_pose[1],
             'Q3': init_pose[2],
-            'D4': init_pose[3]
+            'D4': init_pose[3],
+            'G1': init_pose[4],
+            'G2': init_pose[5]
         }
 
         self.current_cartesian_state = {

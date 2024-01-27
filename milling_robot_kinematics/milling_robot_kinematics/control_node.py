@@ -18,7 +18,7 @@ class ControlPanel(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.robot = KinematicModel(45, 42, [0, 0, 0, 0])
+        self.robot = KinematicModel(45, 42, [0, 0, 0, 0, 0, 0])
 
         self.ui.q1_minus.clicked.connect(self.q1_minus_click)
         self.ui.q1_plus.clicked.connect(self.q1_plus_click)
@@ -53,7 +53,7 @@ class ControlPanel(QMainWindow):
         msg.header.stamp = self.node.get_clock().now().to_msg()
         for joint, val in self.robot.current_joint_state.items():
             msg.name.append(joint)
-            if (joint == 'D4'):
+            if (joint == 'D4' or joint == 'G1' or joint == 'G2'):
                 msg.position.append(val/1000.0)
             else:
                 msg.position.append(math.radians(val))

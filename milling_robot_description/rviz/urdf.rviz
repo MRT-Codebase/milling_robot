@@ -4,7 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 500
   - Class: rviz_common/Views
@@ -50,6 +50,16 @@ Visualization Manager:
         Expand Joint Details: false
         Expand Link Details: false
         Expand Tree: false
+        Gripper1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Gripper2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         Link Tree Style: Links in Alphabetic Order
         base_link:
           Alpha: 1
@@ -88,17 +98,21 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
+        Gripper1:
+          Value: false
+        Gripper2:
+          Value: false
         base_link:
-          Value: true
+          Value: false
         link1:
-          Value: true
+          Value: false
         link2:
-          Value: true
+          Value: false
         link3:
-          Value: true
+          Value: false
         link4:
-          Value: true
+          Value: false
       Marker Scale: 0.05000000074505806
       Name: TF
       Show Arrows: false
@@ -110,7 +124,10 @@ Visualization Manager:
             link2:
               link3:
                 link4:
-                  {}
+                  Gripper1:
+                    {}
+                  Gripper2:
+                    {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -128,25 +145,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.23631690442562103
+      Distance: 0.1855429708957672
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.018576769158244133
-        Y: -0.021102357655763626
-        Z: 0.018192602321505547
+        X: -0.007438765838742256
+        Y: -0.012083899229764938
+        Z: 0.01085739117115736
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.22500011324882507
+      Pitch: 0.38999998569488525
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.710002899169922
+      Yaw: 5.604991436004639
     Saved: ~
 Window Geometry:
   Displays:
