@@ -20,7 +20,7 @@ def generate_launch_description():
 
     ld.add_action(DeclareLaunchArgument(
         name='gui', 
-        default_value='true', 
+        default_value='false', 
         choices=['true', 'false'], 
         description='Flag to enable joint_state_publisher_gui'
         ))
