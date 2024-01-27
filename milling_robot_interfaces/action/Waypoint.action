@@ -1,5 +1,5 @@
 milling_robot_interfaces/Waypoint waypoint
 ---
-trajectory_msgs/JointTrajectory trajectory
+bool result
 ---
 int32 percent

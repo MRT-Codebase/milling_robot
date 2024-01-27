@@ -9,6 +9,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 find_package(trajectory_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
 # Declare ROS messages, services and actions
 set(msg_files
@@ -16,14 +18,13 @@ set(msg_files
 )
 
 set(action_files
-  "action/Trajectory.action"
   "action/Waypoint.action"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
   ${action_files}
-  DEPENDENCIES trajectory_msgs std_msgs nav_msgs
+  DEPENDENCIES std_msgs nav_msgs
   ADD_LINTER_TESTS
 )
 

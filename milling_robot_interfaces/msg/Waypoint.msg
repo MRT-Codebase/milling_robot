@@ -1,3 +1,2 @@
 nav_msgs/Path waypoints
-string mode
-duration time
+float32 time

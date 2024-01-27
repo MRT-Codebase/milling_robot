@@ -1,35 +1,47 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.substitutions import Command
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
+from launch.actions import DeclareLaunchArgument
+from launch.conditions import IfCondition
+
+from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.substitutions import FindPackageShare
 
 
 def generate_launch_description():
     ld = LaunchDescription()
 
-    urdf_tutorial_path = FindPackageShare('milling_robot_description')
-    default_model_path = PathJoinSubstitution(['urdf', 'milling_robot.urdf'])
-    default_rviz_config_path = PathJoinSubstitution([urdf_tutorial_path, 'rviz', 'urdf.rviz'])
+    package_dir = FindPackageShare('milling_robot_description')
+    urdf_path = PathJoinSubstitution([package_dir, 'urdf', 'milling_robot.urdf'])
+    rviz_config_path = PathJoinSubstitution([package_dir, 'rviz', 'urdf.rviz'])
 
-    # These parameters are maintained for backwards compatibility
-    gui_arg = DeclareLaunchArgument(name='gui', default_value='true', choices=['true', 'false'],
-                                    description='Flag to enable joint_state_publisher_gui')
-    ld.add_action(gui_arg)
-    rviz_arg = DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz_config_path,
-                                     description='Absolute path to rviz config file')
-    ld.add_action(rviz_arg)
+    robot_description_content = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 
-    # This parameter has changed its meaning slightly from previous versions
-    ld.add_action(DeclareLaunchArgument(name='model', default_value=default_model_path,
-                                        description='Path to robot urdf file relative to urdf_tutorial package'))
+    ld.add_action(DeclareLaunchArgument(
+        name='gui', 
+        default_value='true', 
+        choices=['true', 'false'], 
+        description='Flag to enable joint_state_publisher_gui'
+        ))
 
-    ld.add_action(IncludeLaunchDescription(
-        PathJoinSubstitution([FindPackageShare('urdf_launch'), 'launch', 'display.launch.py']),
-        launch_arguments={
-            'urdf_package': 'milling_robot_description',
-            'urdf_package_path': LaunchConfiguration('model'),
-            'rviz_config': LaunchConfiguration('rvizconfig'),
-            'jsp_gui': LaunchConfiguration('gui')}.items()
+    ld.add_action(Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        parameters=[{
+            'robot_description': robot_description_content,
+        }]))
+
+    ld.add_action(Node(
+        package='joint_state_publisher_gui',
+        executable='joint_state_publisher_gui',
+        condition=IfCondition(LaunchConfiguration('gui'))
     ))
 
+    ld.add_action(Node(
+        package='rviz2',
+        executable='rviz2',
+        output='screen',
+        arguments=['-d', rviz_config_path],
+    ))
     return ld
