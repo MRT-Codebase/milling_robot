@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 from .ui_file import Ui_MainWindow
+from .kinematic_model import KinematicModel
 
 import math
 import threading
@@ -17,6 +18,8 @@ class ControlPanel(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
+        self.robot = KinematicModel(45, 42, [0, 0, 0, 0])
+
         self.ui.q1_minus.clicked.connect(self.q1_minus_click)
         self.ui.q1_plus.clicked.connect(self.q1_plus_click)
         self.ui.q2_minus.clicked.connect(self.q2_minus_click)
@@ -26,18 +29,7 @@ class ControlPanel(QMainWindow):
         self.ui.d4_minus.clicked.connect(self.d4_minus_click)
         self.ui.d4_plus.clicked.connect(self.d4_plus_click)
 
-        self.current_joint_state = {
-            'Q1': 0.0,
-            'Q2': 0.0,
-            'Q3': 0.0,
-            'D4': 0.0
-        }
-
-        self.current_cartesian_state = {
-            'X': 0.0,
-            'Y': 0.0,
-            'Z': 0.0
-        }
+        self.update_state()
 
         rclpy.init()
         self.node = Node("control_panel_node")
@@ -59,34 +51,55 @@ class ControlPanel(QMainWindow):
     def joint_state_pub_callback(self):
         msg = JointState()
         msg.header.stamp = self.node.get_clock().now().to_msg()
-        for joint, val in self.current_joint_state.items():
+        for joint, val in self.robot.current_joint_state.items():
             msg.name.append(joint)
-            msg.position.append(val)
+            if (joint == 'D4'):
+                msg.position.append(val/1000.0)
+            else:
+                msg.position.append(math.radians(val))
         self.joint_state_pub.publish(msg)
 
+    def update_state(self):
+        self.ui.q1_val.setText(f"{self.robot.current_joint_state['Q1']:.2f}")
+        self.ui.q2_val.setText(f"{self.robot.current_joint_state['Q2']:.2f}")
+        self.ui.q3_val.setText(f"{self.robot.current_joint_state['Q3']:.2f}")
+        self.ui.d4_val.setText(f"{self.robot.current_joint_state['D4']:.2f}")
+        self.ui.x_val.setText(f"{self.robot.current_cartesian_state['X']:.2f}")
+        self.ui.y_val.setText(f"{self.robot.current_cartesian_state['Y']:.2f}")
+        self.ui.z_val.setText(f"{self.robot.current_cartesian_state['Z']:.2f}")
+
     def q1_minus_click(self):
-        self.current_joint_state['Q1'] -= math.radians(self.ui.q1_inc.value())
+        self.robot.movej('Q1', -self.ui.q1_inc.value())
+        self.update_state()
 
     def q1_plus_click(self):
-        self.current_joint_state['Q1'] += math.radians(self.ui.q1_inc.value())
+        self.robot.movej('Q1', self.ui.q1_inc.value())
+        self.update_state()
 
     def q2_minus_click(self):
-        self.current_joint_state['Q2'] -= math.radians(self.ui.q2_inc.value())
+        self.robot.movej('Q2', -self.ui.q2_inc.value())
+        self.update_state()
 
     def q2_plus_click(self):
-        self.current_joint_state['Q2'] += math.radians(self.ui.q2_inc.value())
+        self.robot.movej('Q2', self.ui.q2_inc.value())
+        self.update_state()
 
     def q3_minus_click(self):
-        self.current_joint_state['Q3'] -= math.radians(self.ui.q3_inc.value())
+        self.robot.movej('Q3', -self.ui.q3_inc.value())
+        self.update_state()
 
     def q3_plus_click(self):
-        self.current_joint_state['Q3'] += math.radians(self.ui.q3_inc.value())
+        self.robot.movej('Q3', self.ui.q3_inc.value())
+        self.update_state()
 
     def d4_minus_click(self):
-        self.current_joint_state['D4'] -= self.ui.d4_inc.value() / 1000.0
+        self.robot.movej('D4', -self.ui.d4_inc.value())
+        self.update_state()
 
     def d4_plus_click(self):
-        self.current_joint_state['D4'] += self.ui.d4_inc.value() / 1000.0
+        self.robot.movej('D4', self.ui.d4_inc.value())
+        self.update_state()
+
 
 def main():
     app = QApplication([])
