@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /RobotModel1
         - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 500
@@ -33,7 +34,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 0.800000011920929
+    - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Description File: ""
@@ -145,7 +146,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.1855429708957672
+      Distance: 0.2699238657951355
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -160,10 +161,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.38999998569488525
+      Pitch: 0.3249996304512024
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.604991436004639
+      Yaw: 5.564987659454346
     Saved: ~
 Window Geometry:
   Displays:
