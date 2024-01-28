@@ -16,7 +16,7 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QDoubleSpinBox, QFrame, QGridLayout,
-    QHBoxLayout, QLabel, QListView, QMainWindow,
+    QHBoxLayout, QLabel, QMainWindow, QProgressBar,
     QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
     QVBoxLayout, QWidget)
 
@@ -24,7 +24,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(800, 600)
+        MainWindow.resize(800, 450)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
@@ -307,50 +307,22 @@ class Ui_MainWindow(object):
 
         self.trajectory_generation_layout.addWidget(self.trajectory_generation_title)
 
-        self.waypoint_management_layout = QHBoxLayout()
-        self.waypoint_management_layout.setObjectName(u"waypoint_management_layout")
-        self.waypoint_management_input_layout = QVBoxLayout()
-        self.waypoint_management_input_layout.setObjectName(u"waypoint_management_input_layout")
-        self.verticalSpacer_6 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.waypoint_management_input_layout.addItem(self.verticalSpacer_6)
-
         self.add_waypoint = QPushButton(self.centralwidget)
         self.add_waypoint.setObjectName(u"add_waypoint")
-
-        self.waypoint_management_input_layout.addWidget(self.add_waypoint)
-
-        self.delete_waypoint = QPushButton(self.centralwidget)
-        self.delete_waypoint.setObjectName(u"delete_waypoint")
-
-        self.waypoint_management_input_layout.addWidget(self.delete_waypoint)
-
-        self.reset_trajectory = QPushButton(self.centralwidget)
-        self.reset_trajectory.setObjectName(u"reset_trajectory")
-
-        self.waypoint_management_input_layout.addWidget(self.reset_trajectory)
-
-        self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.waypoint_management_input_layout.addItem(self.verticalSpacer_5)
-
-
-        self.waypoint_management_layout.addLayout(self.waypoint_management_input_layout)
-
-        self.listView = QListView(self.centralwidget)
-        self.listView.setObjectName(u"listView")
-        sizePolicy1 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        sizePolicy1 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Maximum)
         sizePolicy1.setHorizontalStretch(0)
         sizePolicy1.setVerticalStretch(0)
-        sizePolicy1.setHeightForWidth(self.listView.sizePolicy().hasHeightForWidth())
-        self.listView.setSizePolicy(sizePolicy1)
+        sizePolicy1.setHeightForWidth(self.add_waypoint.sizePolicy().hasHeightForWidth())
+        self.add_waypoint.setSizePolicy(sizePolicy1)
 
-        self.waypoint_management_layout.addWidget(self.listView)
+        self.trajectory_generation_layout.addWidget(self.add_waypoint)
 
-        self.waypoint_management_layout.setStretch(0, 1)
-        self.waypoint_management_layout.setStretch(1, 2)
+        self.reset_waypoints = QPushButton(self.centralwidget)
+        self.reset_waypoints.setObjectName(u"reset_waypoints")
+        sizePolicy1.setHeightForWidth(self.reset_waypoints.sizePolicy().hasHeightForWidth())
+        self.reset_waypoints.setSizePolicy(sizePolicy1)
 
-        self.trajectory_generation_layout.addLayout(self.waypoint_management_layout)
+        self.trajectory_generation_layout.addWidget(self.reset_waypoints)
 
         self.play_pause_layout = QHBoxLayout()
         self.play_pause_layout.setObjectName(u"play_pause_layout")
@@ -392,6 +364,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addLayout(self.trajectory_generation_layout)
 
+        self.trajectory_progress_bar = QProgressBar(self.centralwidget)
+        self.trajectory_progress_bar.setObjectName(u"trajectory_progress_bar")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.trajectory_progress_bar.sizePolicy().hasHeightForWidth())
+        self.trajectory_progress_bar.setSizePolicy(sizePolicy3)
+        self.trajectory_progress_bar.setValue(0)
+
+        self.verticalLayout_2.addWidget(self.trajectory_progress_bar)
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -430,8 +413,7 @@ class Ui_MainWindow(object):
         self.x_val.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.trajectory_generation_title.setText(QCoreApplication.translate("MainWindow", u"Trajectory Generation", None))
         self.add_waypoint.setText(QCoreApplication.translate("MainWindow", u"Add Waypoint", None))
-        self.delete_waypoint.setText(QCoreApplication.translate("MainWindow", u"Delete Waypoint", None))
-        self.reset_trajectory.setText(QCoreApplication.translate("MainWindow", u"Reset", None))
+        self.reset_waypoints.setText(QCoreApplication.translate("MainWindow", u"Reset Waypoints", None))
         self.play.setText(QCoreApplication.translate("MainWindow", u"Play", None))
         self.pause.setText(QCoreApplication.translate("MainWindow", u"Pause", None))
         self.stop.setText(QCoreApplication.translate("MainWindow", u"Stop", None))

@@ -7,8 +7,9 @@ import threading
 
 import rclpy
 from rclpy.node import Node
-from geometry_msgs.msg import PoseStamped
+from nav_msgs.msg import Path
 from sensor_msgs.msg import JointState
+from geometry_msgs.msg import PoseStamped
 from milling_robot_interfaces.msg import Waypoint
 
 class ControlPanel(QMainWindow):
@@ -18,7 +19,7 @@ class ControlPanel(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.robot = KinematicModel(45, 42, [0, 0, 0, 0, 0, 0])
+        self.robot = KinematicModel(45, 42, 25, [0, 0, 0, 0, 0, 0])
 
         self.ui.q1_minus.clicked.connect(self.q1_minus_click)
         self.ui.q1_plus.clicked.connect(self.q1_plus_click)
@@ -34,14 +35,21 @@ class ControlPanel(QMainWindow):
         self.ui.y_plus.clicked.connect(self.y_plus_click)
         self.ui.z_minus.clicked.connect(self.z_minus_click)
         self.ui.z_plus.clicked.connect(self.z_plus_click)
+        self.ui.add_waypoint.clicked.connect(self.add_waypoint_click)
+        self.ui.reset_waypoints.clicked.connect(self.reset_waypoints)
 
         self.update_state()
 
         rclpy.init()
         self.node = Node("control_panel_node")
 
+        self.timer = self.node.create_timer(0.1, self.timer_callback)
+        
         self.joint_state_pub = self.node.create_publisher(JointState, 'joint_states', 10)
-        self.joint_state_timer = self.node.create_timer(0.1, self.joint_state_pub_callback)
+        
+        self.trajectory_pub = self.node.create_publisher(Path, 'trajectory', 10)
+        self.trajectory = Path()
+        self.trajectory.header.frame_id = "trajectory"
 
         self.ros_thread = threading.Thread(target=self.run_ros_node)
         self.ros_thread.daemon = True
@@ -54,7 +62,7 @@ class ControlPanel(QMainWindow):
         except KeyboardInterrupt:
             pass
 
-    def joint_state_pub_callback(self):
+    def timer_callback(self):
         msg = JointState()
         msg.header.stamp = self.node.get_clock().now().to_msg()
         for joint, val in self.robot.current_joint_state.items():
@@ -64,6 +72,7 @@ class ControlPanel(QMainWindow):
             else:
                 msg.position.append(math.radians(val))
         self.joint_state_pub.publish(msg)
+        self.trajectory_pub.publish(self.trajectory)
 
     def update_state(self):
         self.ui.q1_val.setText(f"{self.robot.current_joint_state['Q1']:.2f}")
@@ -129,6 +138,17 @@ class ControlPanel(QMainWindow):
     def z_plus_click(self):
         self.robot.movel('Z', self.ui.z_inc.value())
         self.update_state()
+
+    def add_waypoint_click(self):
+        self.trajectory.header.stamp = self.node.get_clock().now().to_msg()
+        new_point = PoseStamped()
+        new_point.pose.position.x = -(self.robot.current_cartesian_state['X'] / 1000.0)
+        new_point.pose.position.y = -(self.robot.current_cartesian_state['Y'] / 1000.0)
+        new_point.pose.position.z = self.robot.current_cartesian_state['Z'] / 1000.0
+        self.trajectory.poses.append(new_point)
+
+    def reset_waypoints(self):
+        self.trajectory.poses.clear()
 
 
 def main():

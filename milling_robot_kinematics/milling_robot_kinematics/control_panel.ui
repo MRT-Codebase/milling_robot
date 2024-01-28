@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>450</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -465,69 +465,30 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="waypoint_management_layout" stretch="1,2">
-        <item>
-         <layout class="QVBoxLayout" name="waypoint_management_input_layout">
-          <item>
-           <spacer name="verticalSpacer_6">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item>
-           <widget class="QPushButton" name="add_waypoint">
-            <property name="text">
-             <string>Add Waypoint</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="delete_waypoint">
-            <property name="text">
-             <string>Delete Waypoint</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="reset_trajectory">
-            <property name="text">
-             <string>Reset</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_5">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item>
-         <widget class="QListView" name="listView">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QPushButton" name="add_waypoint">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Add Waypoint</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="reset_waypoints">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Reset Waypoints</string>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="play_pause_layout">
@@ -599,6 +560,19 @@
        </layout>
       </item>
      </layout>
+    </item>
+    <item>
+     <widget class="QProgressBar" name="trajectory_progress_bar">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

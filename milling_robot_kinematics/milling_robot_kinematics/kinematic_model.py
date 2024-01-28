@@ -1,9 +1,10 @@
 import math
 
 class KinematicModel:
-    def __init__(self, a, b, init_pose):
+    def __init__(self, a, b, c, init_pose):
         self.a = a
         self.b = b
+        self.c = c
 
         self.joint_limits = {
             'Q1': [-180, 180],
@@ -62,10 +63,11 @@ class KinematicModel:
     def FKM(self, q1, q2, d4):
         x = -(self.a - (d4 + self.b) * math.sin(math.radians(q2))) * math.sin(math.radians(q1))
         y = (self.a - (d4 + self.b) * math.sin(math.radians(q2))) * math.cos(math.radians(q1))
-        z = (d4 + self.b) * math.cos(math.radians(q2))
+        z = (d4 + self.b) * math.cos(math.radians(q2)) + self.c
         return [x, y, z]
     
     def IKM(self, x, y, z):
+        z = z - self.c
         q1 = -math.atan2(x, y)
         q2 = math.atan2(x+self.a*math.sin(q1), z*math.sin(q1))
         d4 = z/math.cos(q2) - self.b
