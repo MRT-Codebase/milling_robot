@@ -3,7 +3,9 @@ from .ui_file import Ui_MainWindow
 from .kinematic_model import KinematicModel
 
 import math
+import time
 import threading
+import numpy as np
 
 import rclpy
 from rclpy.node import Node
@@ -36,7 +38,8 @@ class ControlPanel(QMainWindow):
         self.ui.z_minus.clicked.connect(self.z_minus_click)
         self.ui.z_plus.clicked.connect(self.z_plus_click)
         self.ui.add_waypoint.clicked.connect(self.add_waypoint_click)
-        self.ui.reset_waypoints.clicked.connect(self.reset_waypoints)
+        self.ui.reset_waypoints.clicked.connect(self.reset_waypoints_click)
+        self.ui.play.clicked.connect(self.play_click)
 
         self.update_state()
 
@@ -83,60 +86,75 @@ class ControlPanel(QMainWindow):
         self.ui.y_val.setText(f"{self.robot.current_cartesian_state['Y']:.2f}")
         self.ui.z_val.setText(f"{self.robot.current_cartesian_state['Z']:.2f}")
 
+    def interpolate(self, resolution=5):
+        interpolated_points = []
+
+        for i in range(len(self.trajectory.poses)-1):
+
+            point1 = np.array([-self.trajectory.poses[i].pose.position.x*1000, -self.trajectory.poses[i].pose.position.y*1000, self.trajectory.poses[i].pose.position.z*1000])
+            point2 = np.array([-self.trajectory.poses[i+1].pose.position.x*1000, -self.trajectory.poses[i+1].pose.position.y*1000, self.trajectory.poses[i+1].pose.position.z*1000])
+
+            for i in range(resolution):
+                alpha = i / (resolution - 1)
+                interpolated_point = (1 - alpha) * point1 + alpha * point2
+                interpolated_points.append(interpolated_point)
+
+        return np.array(interpolated_points)
+
     def q1_minus_click(self):
-        self.robot.movej('Q1', -self.ui.q1_inc.value())
+        self.robot.movej_rel('Q1', -self.ui.q1_inc.value())
         self.update_state()
 
     def q1_plus_click(self):
-        self.robot.movej('Q1', self.ui.q1_inc.value())
+        self.robot.movej_rel('Q1', self.ui.q1_inc.value())
         self.update_state()
 
     def q2_minus_click(self):
-        self.robot.movej('Q2', -self.ui.q2_inc.value())
+        self.robot.movej_rel('Q2', -self.ui.q2_inc.value())
         self.update_state()
 
     def q2_plus_click(self):
-        self.robot.movej('Q2', self.ui.q2_inc.value())
+        self.robot.movej_rel('Q2', self.ui.q2_inc.value())
         self.update_state()
 
     def q3_minus_click(self):
-        self.robot.movej('Q3', -self.ui.q3_inc.value())
+        self.robot.movej_rel('Q3', -self.ui.q3_inc.value())
         self.update_state()
 
     def q3_plus_click(self):
-        self.robot.movej('Q3', self.ui.q3_inc.value())
+        self.robot.movej_rel('Q3', self.ui.q3_inc.value())
         self.update_state()
 
     def d4_minus_click(self):
-        self.robot.movej('D4', -self.ui.d4_inc.value())
+        self.robot.movej_rel('D4', -self.ui.d4_inc.value())
         self.update_state()
 
     def d4_plus_click(self):
-        self.robot.movej('D4', self.ui.d4_inc.value())
+        self.robot.movej_rel('D4', self.ui.d4_inc.value())
         self.update_state()
 
     def x_minus_click(self):
-        self.robot.movel('X', -self.ui.x_inc.value())
+        self.robot.movel_rel('X', -self.ui.x_inc.value())
         self.update_state()
 
     def x_plus_click(self):
-        self.robot.movel('X', self.ui.x_inc.value())
+        self.robot.movel_rel('X', self.ui.x_inc.value())
         self.update_state()
 
     def y_minus_click(self):
-        self.robot.movel('Y', -self.ui.y_inc.value())
+        self.robot.movel_rel('Y', -self.ui.y_inc.value())
         self.update_state()
 
     def y_plus_click(self):
-        self.robot.movel('Y', self.ui.y_inc.value())
+        self.robot.movel_rel('Y', self.ui.y_inc.value())
         self.update_state()
 
     def z_minus_click(self):
-        self.robot.movel('Z', -self.ui.z_inc.value())
+        self.robot.movel_rel('Z', -self.ui.z_inc.value())
         self.update_state()
 
     def z_plus_click(self):
-        self.robot.movel('Z', self.ui.z_inc.value())
+        self.robot.movel_rel('Z', self.ui.z_inc.value())
         self.update_state()
 
     def add_waypoint_click(self):
@@ -147,8 +165,16 @@ class ControlPanel(QMainWindow):
         new_point.pose.position.z = self.robot.current_cartesian_state['Z'] / 1000.0
         self.trajectory.poses.append(new_point)
 
-    def reset_waypoints(self):
+    def reset_waypoints_click(self):
         self.trajectory.poses.clear()
+
+    def play_click(self):
+        inter_points = self.interpolate()
+        print(inter_points)
+        for point in inter_points:
+            self.robot.movel_abs(point[0], point[1], point[2])
+            self.update_state()
+            time.sleep(0.1)
 
 
 def main():
