@@ -3,16 +3,18 @@ from .ui_file import Ui_MainWindow
 from .kinematic_model import KinematicModel
 
 import math
-import time
 import threading
 import numpy as np
 
 import rclpy
 from rclpy.node import Node
+from rclpy.action import ActionClient
+
 from nav_msgs.msg import Path
 from sensor_msgs.msg import JointState
 from geometry_msgs.msg import PoseStamped
-from milling_robot_interfaces.msg import Waypoint
+from trajectory_msgs.msg import JointTrajectoryPoint
+from milling_robot_interfaces.action import JointTraj
 
 class ControlPanel(QMainWindow):
     def __init__(self):
@@ -53,6 +55,8 @@ class ControlPanel(QMainWindow):
         self.trajectory_pub = self.node.create_publisher(Path, 'trajectory', 10)
         self.trajectory = Path()
         self.trajectory.header.frame_id = "trajectory"
+        self.trajectory_running = False
+        self.trajectory_client = ActionClient(self, JointTraj, 'joint_traj')
 
         self.ros_thread = threading.Thread(target=self.run_ros_node)
         self.ros_thread.daemon = True
@@ -66,15 +70,16 @@ class ControlPanel(QMainWindow):
             pass
 
     def timer_callback(self):
-        msg = JointState()
-        msg.header.stamp = self.node.get_clock().now().to_msg()
-        for joint, val in self.robot.current_joint_state.items():
-            msg.name.append(joint)
-            if (joint == 'D4' or joint == 'G1' or joint == 'G2'):
-                msg.position.append(val/1000.0)
-            else:
-                msg.position.append(math.radians(val))
-        self.joint_state_pub.publish(msg)
+        if not self.trajectory_running:
+            msg = JointState()
+            msg.header.stamp = self.node.get_clock().now().to_msg()
+            for joint, val in self.robot.current_joint_state.items():
+                msg.name.append(joint)
+                if (joint == 'D4' or joint == 'G1' or joint == 'G2'):
+                    msg.position.append(val/1000.0)
+                else:
+                    msg.position.append(math.radians(val))
+            self.joint_state_pub.publish(msg)
         self.trajectory_pub.publish(self.trajectory)
 
     def update_state(self):
@@ -86,7 +91,7 @@ class ControlPanel(QMainWindow):
         self.ui.y_val.setText(f"{self.robot.current_cartesian_state['Y']:.2f}")
         self.ui.z_val.setText(f"{self.robot.current_cartesian_state['Z']:.2f}")
 
-    def interpolate(self, resolution=5):
+    def interpolate(self, resolution=100):
         interpolated_points = []
 
         for i in range(len(self.trajectory.poses)-1):
@@ -102,59 +107,73 @@ class ControlPanel(QMainWindow):
         return np.array(interpolated_points)
 
     def q1_minus_click(self):
-        self.robot.movej_rel('Q1', -self.ui.q1_inc.value())
+        result =self.robot.movej_rel('Q1', -self.ui.q1_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def q1_plus_click(self):
-        self.robot.movej_rel('Q1', self.ui.q1_inc.value())
+        result = self.robot.movej_rel('Q1', self.ui.q1_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def q2_minus_click(self):
-        self.robot.movej_rel('Q2', -self.ui.q2_inc.value())
+        result =self.robot.movej_rel('Q2', -self.ui.q2_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def q2_plus_click(self):
-        self.robot.movej_rel('Q2', self.ui.q2_inc.value())
+        result = self.robot.movej_rel('Q2', self.ui.q2_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def q3_minus_click(self):
-        self.robot.movej_rel('Q3', -self.ui.q3_inc.value())
+        result =self.robot.movej_rel('Q3', -self.ui.q3_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def q3_plus_click(self):
-        self.robot.movej_rel('Q3', self.ui.q3_inc.value())
+        result = self.robot.movej_rel('Q3', self.ui.q3_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def d4_minus_click(self):
-        self.robot.movej_rel('D4', -self.ui.d4_inc.value())
+        result =self.robot.movej_rel('D4', -self.ui.d4_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def d4_plus_click(self):
-        self.robot.movej_rel('D4', self.ui.d4_inc.value())
+        result = self.robot.movej_rel('D4', self.ui.d4_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def x_minus_click(self):
-        self.robot.movel_rel('X', -self.ui.x_inc.value())
+        result =  self.robot.movel_rel('X', -self.ui.x_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def x_plus_click(self):
-        self.robot.movel_rel('X', self.ui.x_inc.value())
+        result =   self.robot.movel_rel('X', self.ui.x_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def y_minus_click(self):
-        self.robot.movel_rel('Y', -self.ui.y_inc.value())
+        result =  self.robot.movel_rel('Y', -self.ui.y_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def y_plus_click(self):
-        self.robot.movel_rel('Y', self.ui.y_inc.value())
+        result =   self.robot.movel_rel('Y', self.ui.y_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def z_minus_click(self):
-        self.robot.movel_rel('Z', -self.ui.z_inc.value())
+        result =  self.robot.movel_rel('Z', -self.ui.z_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def z_plus_click(self):
-        self.robot.movel_rel('Z', self.ui.z_inc.value())
+        result =   self.robot.movel_rel('Z', self.ui.z_inc.value())
+        self.ui.statusbar.showMessage(result)
         self.update_state()
 
     def add_waypoint_click(self):
@@ -169,12 +188,57 @@ class ControlPanel(QMainWindow):
         self.trajectory.poses.clear()
 
     def play_click(self):
+        self.trajectory_running = True
+        joint_limit_error = False
+        joints = []
         inter_points = self.interpolate()
-        print(inter_points)
         for point in inter_points:
-            self.robot.movel_abs(point[0], point[1], point[2])
-            self.update_state()
-            time.sleep(0.1)
+            j = self.robot.IKM(point[0], point[1], point[2])
+            result = self.robot.check_limits(j[0], j[1], j[2])
+            if result:
+                joints.append(j)
+            else:
+                joint_limit_error = True
+                break
+        if joint_limit_error:
+            self.ui.statusbar.showMessage("Trajectory contains points where joint limit exceeds")
+        else:
+            self.ui.statusbar.showMessage("Running trajectory")
+            self.send_goal(joints)
+
+    def send_goal(self, joints):
+        goal_msg = JointTraj.Goal()
+        for joint in joints:
+            joint_point_msg = JointTrajectoryPoint()
+            joint_point_msg.positions = joint
+            goal_msg.joint_traj.points.append(joint_point_msg)
+
+        self.trajectory_client.wait_for_server()
+
+        self._send_goal_future = self.trajectory_client.send_goal_async(goal_msg, feedback_callback=self.feedback_callback)
+
+        self._send_goal_future.add_done_callback(self.goal_response_callback)
+
+    def goal_response_callback(self, future):
+        goal_handle = future.result()
+        if not goal_handle.accepted:
+            self.get_logger().info('Goal rejected :(')
+            self.trajectory_running = False
+            return
+
+        self.get_logger().info('Goal accepted :)')
+        self.trajectory_running = False
+        self._get_result_future = goal_handle.get_result_async()
+        self._get_result_future.add_done_callback(self.get_result_callback)
+
+    def get_result_callback(self, future):
+        result = future.result().result
+        self.get_logger().info('Result: {0}'.format(result.success))
+        rclpy.shutdown()
+
+    def feedback_callback(self, feedback_msg):
+        feedback = feedback_msg.feedback
+        self.get_logger().info('Received feedback: {0}'.format(feedback.percent))
 
 
 def main():

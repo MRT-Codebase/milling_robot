@@ -33,6 +33,14 @@ class KinematicModel:
         # Used to fill cartesian state with appropriate values
         self.movej_rel('Q1', 0)
 
+    def check_limits(self, q1, q2, d4):
+        if (self.joint_limits['Q1'][0] <= q1 <= self.joint_limits['Q1'][1] and
+            self.joint_limits['Q2'][0] <= q2 <= self.joint_limits['Q2'][1] and
+            self.joint_limits['D4'][0] <= d4 <= self.joint_limits['D4'][1]):
+            return True
+        else:
+            return False
+
     def movej_rel(self, axis, delta):
         next = self.current_joint_state[axis] + delta
         if (self.joint_limits[axis][0] <= next <= self.joint_limits[axis][1]):
@@ -41,9 +49,9 @@ class KinematicModel:
             self.current_cartesian_state['X'] = pose[0]
             self.current_cartesian_state['Y'] = pose[1]
             self.current_cartesian_state['Z'] = pose[2]
-            return True
+            return "In bounds"
         else:
-            return False
+            return "Joint limit exceeded!"
         
     def movel_rel(self, axis, delta):
         self.current_cartesian_state[axis] += delta
@@ -54,10 +62,10 @@ class KinematicModel:
             self.current_joint_state['Q1'] = j[0]
             self.current_joint_state['Q2'] = j[1]
             self.current_joint_state['D4'] = j[2]
-            return True
+            return "In bounds"
         else:
             self.current_cartesian_state[axis] -= delta
-            return False
+            return "Joint limit exceeded!"
         
     def movej_abs(self, q1, q2, d4):
         if (self.joint_limits['Q1'][0] <= q1 <= self.joint_limits['Q1'][1] and
@@ -70,9 +78,9 @@ class KinematicModel:
             self.current_cartesian_state['X'] = pose[0]
             self.current_cartesian_state['Y'] = pose[1]
             self.current_cartesian_state['Z'] = pose[2]
-            return True
+            return "In bounds"
         else:
-            return False
+            return "Joint limit exceeded!"
         
     def movel_abs(self, x, y, z):
         j = self.IKM(x, y, z)
@@ -85,9 +93,9 @@ class KinematicModel:
             self.current_cartesian_state['X'] = x
             self.current_cartesian_state['Y'] = y
             self.current_cartesian_state['Z'] = z
-            return True
+            return "In bounds"
         else:
-            return False
+            return "Joint limit exceeded!"
 
     def FKM(self, q1, q2, d4):
         x = -(self.a - (d4 + self.b) * math.sin(math.radians(q2))) * math.sin(math.radians(q1))

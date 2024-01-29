@@ -18,13 +18,14 @@ set(msg_files
 )
 
 set(action_files
+  "action/JointTraj.action"
   "action/Waypoint.action"
 )
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   ${msg_files}
   ${action_files}
-  DEPENDENCIES std_msgs nav_msgs
+  DEPENDENCIES trajectory_msgs std_msgs nav_msgs
   ADD_LINTER_TESTS
 )
 
